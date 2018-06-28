@@ -31,20 +31,40 @@ class HTTPResource:
         response.raise_for_status()
         index_response = response.text
 
+        log.debug('index_response: %s', index_response)
+
         versions = regex.findall(index_response)
-        versions.sort(key=lambda x: LooseVersion(x))
         versions = [{'version': v} for v in versions]
 
-        # if version is specified get only newer versions
-        if version and version in versions:
-            current_version = version
-            new_versions = versions[versions.index(current_version):]
-            new_versions.pop(0)
-        else:
-            # otherwise only get the current version
-            new_versions = [versions[-1]]
+        return self.filter_new_versions(versions, version)
 
-        return new_versions
+    def filter_new_versions(self, versions, version):
+        """Filter and sort version list according to concourse spec for new versions.
+
+        https://concourse-ci.org/implementing-resources.html#resource-check
+        """
+
+        requested_version_valid = True
+
+        # temporary add requested version for sorting/filter purposes
+        if version and version not in versions:
+            versions.append(version)
+            requested_version_valid = False
+
+        versions.sort(key=lambda x: LooseVersion(x['version']))
+
+        # no initial version, only return most recent version
+        if not version:
+            return [versions[-1]]
+
+        # remove all old versions
+        versions = versions[versions.index(version):]
+
+        # remove requested version if it was not in the received version list
+        if not requested_version_valid:
+            versions.remove(version)
+
+        return versions
 
     def in_cmd(self, target_dir, source, version):
         """Download specific version to target_dir."""
