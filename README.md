@@ -1,3 +1,8 @@
+[![Docker Automated build](https://img.shields.io/docker/pulls/aequitas/http-resource.svg)](https://hub.docker.com/r/aequitas/http-resource/)
+[![Docker Automated build](https://img.shields.io/docker/automated/aequitas/http-resource.svg)](https://hub.docker.com/r/aequitas/http-resource/)
+[![Docker Automated build](https://img.shields.io/docker/build/aequitas/http-resource.svg)](https://hub.docker.com/r/aequitas/http-resource/)
+[![Cyberveiligheid](https://img.shields.io/badge/Cyberveiligheid-97%25-yellow.svg)](https://eurocyber.nl)
+
 # HTTP(S) Resource (download only)
 
 Concourse resource to a crawl HTTP(S) page for versions and to downloading files.
