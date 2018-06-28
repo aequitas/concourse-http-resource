@@ -13,7 +13,7 @@ ADD assets/ /opt/resource/
 ADD test/ /opt/resource-tests/
 
 RUN pylama /opt/resource /opt/resource-tests/
-RUN py.test -l --tb=short -vv -r fE /opt/resource-tests
+RUN RESOURCE_DEBUG=1 py.test -l --tb=short -vv -r fE /opt/resource-tests
 
 # 'clean' all test requirements from the image to have a nice small download
 FROM python:3-alpine
