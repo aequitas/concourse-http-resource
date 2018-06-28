@@ -8,6 +8,7 @@ For interacting with HTTP API endpoints see: https://github.com/aequitas/concour
 
 ## Recent changes
 
+- 06-2018: Handle missing previous version in version list. (@jmcarp)
 - 06-2018: added README
 
 ## Deploying to Concourse
