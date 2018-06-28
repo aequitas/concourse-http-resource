@@ -106,4 +106,9 @@ jobs:
 
 ```
 
+## Development
 
+### Testing
+This resource runs a lint/test suite before building the Docker image. To test/build the image simply run:
+
+    docker build .
