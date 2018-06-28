@@ -36,9 +36,9 @@ class HTTPResource:
         versions = regex.findall(index_response)
         versions = [{'version': v} for v in versions]
 
-        return self.filter_new_versions(versions, version)
+        return self._filter_new_versions(versions, version)
 
-    def filter_new_versions(self, versions, version):
+    def _filter_new_versions(self, versions, version):
         """Filter and sort version list according to concourse spec for new versions.
 
         https://concourse-ci.org/implementing-resources.html#resource-check
