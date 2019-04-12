@@ -78,8 +78,8 @@ resources:
   - name: demo
     type: http
     source:
-			index: http://example.com/index.html
-			regex: 'href="/file-(?P<version>[0-9\.-]).txt"'
+      index: http://example.com/index.html
+      regex: 'href="/file-(?P<version>[0-9\.-]).txt"'
       uri: 'http://example.com/file-{version}.txt'
 ````
 
@@ -96,10 +96,10 @@ resources:
   - name: grafana_rpm
     type: http
     source:
-			index: https://packagecloud.io/grafana/stable
-			regex: 'href="/grafana/stable/packages/el/6/grafana-(?P<version>[0-9\.-]).x86_64.rpm"'
+      index: https://packagecloud.io/grafana/stable
+      regex: 'href="/grafana/stable/packages/el/6/grafana-(?P<version>[0-9\.-]).x86_64.rpm"'
       uri: 'https://packagecloud.io/grafana/stable/packages/el/6/grafana-{version}.x86_64.rpm/download.rpm'
-			filename: 'grafana-{version}.x86_64.rpm'
+      filename: 'grafana-{version}.x86_64.rpm'
 
 jobs:
   - name: grafana
@@ -109,6 +109,18 @@ jobs:
       - task: ...
         ...
 
+```
+
+### Tracking Vagrant releases (courtesy of @suhlig)
+
+```yaml
+jobs:
+  - name: Vagrant Release
+    type: http
+    source:
+      index: https://releases.hashicorp.com/vagrant/
+      regex: 'href="/vagrant/(?P<version>[0-9\.]+)'
+      uri: 'https://releases.hashicorp.com/vagrant/{version}/vagrant_{version}_SHA256SUMS'
 ```
 
 ## Development
